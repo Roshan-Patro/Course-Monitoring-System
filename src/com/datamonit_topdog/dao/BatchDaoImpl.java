@@ -32,14 +32,46 @@ public class BatchDaoImpl implements BatchDao {
 
 	@Override
 	public String updateBatchNameUsingBatchId(int batchId, String batchName) {
-		// TODO Auto-generated method stub
-		return null;
+		String message = "Batch name updation failed..";
+		
+		try(Connection conn = DBUtil.provideConnection()) {
+			
+			PreparedStatement ps = conn.prepareStatement("update batch set batchname = ? where batchid = ?");
+			ps.setString(1, batchName);
+			ps.setInt(2, batchId);
+			
+			int x = ps.executeUpdate();
+			
+			if(x>0) {
+				message = x+" records updated.";
+			}
+		} catch (SQLException e) {
+			message = e.getMessage();
+		}
+		
+		return message;
 	}
 
 	@Override
-	public String updateBatchNameUsingBatchName(String BatchName, String newBatchName) {
-		// TODO Auto-generated method stub
-		return null;
+	public String updateBatchNameUsingBatchName(String batchName, String newBatchName) {
+		String message = "Batch name updation failed..";
+		
+		try(Connection conn = DBUtil.provideConnection()) {
+			
+			PreparedStatement ps = conn.prepareStatement("update course set batchname = ? where batchname = ?");
+			ps.setString(1, newBatchName);
+			ps.setString(2, batchName);
+			
+			int x = ps.executeUpdate();
+			
+			if(x>0) {
+				message = x+" records updated.";
+			}
+		} catch (SQLException e) {
+			message = e.getMessage();
+		}
+		
+		return message;
 	}
 
 }
