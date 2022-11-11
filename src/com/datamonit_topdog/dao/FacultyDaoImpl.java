@@ -8,18 +8,17 @@ import com.datamonit_topdog.utility.DBUtil;
 
 public class FacultyDaoImpl implements FacultyDao {
 	
-	public String registerFaculty(String facultyname, String facultyaddress, long mobile, String email, String username, String password) {
+	public String registerFaculty(String facultyname, String facultyaddress, long mobile, String email) {
 		String message = "Faculty registration failed...";
 		
 		try(Connection conn = DBUtil.provideConnection()) {
 			
-			PreparedStatement ps = conn.prepareStatement("insert into faculty(facultyname,facultyaddress,mobile,email,username,password) values(?,?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("insert into faculty(facultyname,facultyaddress,mobile,email) values(?,?,?,?)");
 			ps.setString(1, facultyname);
 			ps.setString(2, facultyaddress);
 			ps.setLong(3, mobile);
 			ps.setString(4, email);
-			ps.setString(5, username);
-			ps.setString(6, password);
+			
 			int x = ps.executeUpdate();
 			
 			if(x>0) {

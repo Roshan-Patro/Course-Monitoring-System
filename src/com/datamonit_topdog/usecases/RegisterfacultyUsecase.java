@@ -24,17 +24,11 @@ public class RegisterfacultyUsecase {
 		System.out.println("Enter email address:");
 		String email = sc.nextLine();
 		
-		System.out.println("Enter username:");
-		String username = sc.nextLine();
-		
-		System.out.println("Enter password:");
-		String password = sc.nextLine();
-		
 		sc.close();
 		
 		FacultyDao dao = new FacultyDaoImpl();
 		
-		String result = dao.registerFaculty(facultyname, facultyaddress, mobile, email, username, password);
+		String result = dao.registerFaculty(facultyname, facultyaddress, mobile, email);
 		
 		System.out.println(result);
 		

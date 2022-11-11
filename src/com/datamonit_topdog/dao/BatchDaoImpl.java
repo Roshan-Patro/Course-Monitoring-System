@@ -30,4 +30,16 @@ public class BatchDaoImpl implements BatchDao {
 		return message;
 	}
 
+	@Override
+	public String updateBatchNameUsingBatchId(int batchId, String batchName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateBatchNameUsingBatchName(String BatchName, String newBatchName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
