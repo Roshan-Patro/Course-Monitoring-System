@@ -1,4 +1,4 @@
-package com.datamonit_topdog.usecases;
+package com.datamonit_topdog.usecases.faculty;
 
 import java.util.Scanner;
 
