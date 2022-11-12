@@ -171,6 +171,9 @@ public class CourseDaoImpl implements CourseDao {
 				
 				course = new Course(ci,cn,f,cd);
 			}
+			else {
+				throw new CourseException("NO course found with the id: "+courseId);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new CourseException(e.getMessage());
@@ -194,6 +197,9 @@ public class CourseDaoImpl implements CourseDao {
 				
 				fee = f;
 			}
+			else {
+				throw new CourseException("NO course found with the name: "+courseName);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new CourseException(e.getMessage());
@@ -216,6 +222,9 @@ public class CourseDaoImpl implements CourseDao {
 				String cd = rs.getString("coursedescription");
 				
 				desc = cd;
+			}
+			else {
+				throw new CourseException("NO course found with the name: "+courseName);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
