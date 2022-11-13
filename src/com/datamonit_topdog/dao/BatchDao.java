@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.datamonit_topdog.exceptions.BatchException;
 import com.datamonit_topdog.exceptions.CoursePlanException;
+import com.datamonit_topdog.exceptions.FacultyException;
 import com.datamonit_topdog.models.Batch;
 import com.datamonit_topdog.models.CoursePlan;
 
@@ -44,7 +45,7 @@ public interface BatchDao {
 	
 	public List<Integer> getAllBatchesIdsOfAFaculty(int facultyId) throws BatchException;
 	
-//	public List<String> getDaywiseReportOfABatch(int batchId) throws BatchException;
+	public List<String> getDaywiseUpdateOfEveryBatch(int dayNumber) throws BatchException,FacultyException,CoursePlanException;
 //	
 //	public List<CoursePlan> dayWiseUpdateOfEveryBatch() throws CoursePlanException;
 }

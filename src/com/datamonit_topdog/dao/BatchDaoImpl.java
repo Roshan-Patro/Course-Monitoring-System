@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.datamonit_topdog.exceptions.BatchException;
+import com.datamonit_topdog.exceptions.CoursePlanException;
+import com.datamonit_topdog.exceptions.FacultyException;
 import com.datamonit_topdog.models.Batch;
 import com.datamonit_topdog.utility.DBUtil;
 
@@ -470,6 +472,47 @@ public class BatchDaoImpl implements BatchDao {
 		
 		if(list.size()==0) {
 			throw new BatchException("No batch found for facultyid: "+facultyId);
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<String> getDaywiseUpdateOfEveryBatch(int dayNumber)
+			throws BatchException, FacultyException, CoursePlanException {
+		List<String> list = new ArrayList<>();
+		
+		try(Connection conn = DBUtil.provideConnection()) {
+			
+			PreparedStatement ps = conn.prepareStatement("select cp.planid,cp.courseid,cp.batchid,b.batchname,cp.daynumber,"
+					                                     + "f.facultyid,f.facultyname,cp.topic,cp.status from courseplan cp inner "
+					                                     + "join batch b inner join faculty f on cp.batchid=b.batchid and "
+					                                     + "f.facultyid=b.facultyid and cp.daynumber = ?;");
+			ps.setInt(1, dayNumber);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				
+				int planid = rs.getInt("planid");
+				int courseid = rs.getInt("courseid");
+				int batchid = rs.getInt("batchid");
+				String batchname = rs.getString("batchname");
+				int daynumber = rs.getInt("daynumber");
+				int facultyid = rs.getInt("facultyid");
+				String facultyname = rs.getString("facultyname");
+				String topic = rs.getString("topic");
+				String status = rs.getString("status");
+				
+				String str = "PlanId: "+planid+", CourseId: "+courseid+", BatchId: "+batchid+", BatchName: "+batchname+", DayNumber: "+daynumber+", FacultyId: "+facultyid+", FacultyName: "+facultyname+", Topic: "+topic+", Status:"+status;
+				list.add(str);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BatchException(e.getMessage());
+		}
+		
+		if(list.size()==0) {
+			throw new BatchException("No update found for daynumber: "+dayNumber);
 		}
 		
 		return list;
