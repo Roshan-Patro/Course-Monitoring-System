@@ -29,5 +29,28 @@ public class CreateACourse {
 		
 		System.out.println(result);
 	}
+	
+	public static void createC() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter course name:");
+		String coursename = sc.nextLine();
+		
+		System.out.println("Enter the fee:");
+		int fee = sc.nextInt();
+		
+		sc.nextLine();
+		
+		System.out.println("Enter course description:");
+		String coursedescription = sc.nextLine();
+		
+		sc.close();
+		
+		CourseDao dao = new CourseDaoImpl();
+		
+		String result = dao.createCourse(coursename, fee, coursedescription);
+		
+		System.out.println(result);
+	}
 
 }
