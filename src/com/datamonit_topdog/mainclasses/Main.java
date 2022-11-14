@@ -23,7 +23,6 @@ import com.datamonit_topdog.models.Batch;
 import com.datamonit_topdog.models.Course;
 import com.datamonit_topdog.models.CoursePlan;
 import com.datamonit_topdog.models.Faculty;
-import com.datamonit_topdog.usecases.CreateACourse;
 import com.datamonit_topdog.utility.DBUtil;
 
 public class Main {
@@ -74,7 +73,7 @@ public class Main {
 					int fee = Integer.MIN_VALUE;
 					String resultc = null;
 					int courseidc = 0;
-					while(choiceCourseMenu!=-1) {
+					while(flag==true && flagA==true) {
 						switch (choiceCourseMenu) {
 						case 1: // create a course
 							System.out.println("Enter course name:");
@@ -233,6 +232,7 @@ public class Main {
 					BatchDao daob = new BatchDaoImpl();
 					boolean flagb = true;
 					boolean flagbA = true;
+					int batchIdB = 0;
 					while(flagb == true && flagbA == true) {
 						switch (choiceBatchMenu) {
 						case 1: // create a batch
@@ -302,6 +302,59 @@ public class Main {
 							}
 							adminBatchMenu();
 					    	break;
+					    case 5: // get all batches of a course
+					    	System.out.println("Enter the course id that you want to see all batches for:");
+							int courseId = sc.nextInt();
+							sc.nextLine();
+							try {
+								List<Batch> batchList = daob.getAllBatchesOfACourse(courseId);
+								
+								batchList.forEach(c -> System.out.println(c));
+								
+							} catch (BatchException e) {
+								System.out.println(e.getMessage());
+							}
+							adminBatchMenu();
+					    	break;
+					    case 6: // get all faculties of a batch
+					    	System.out.println("Enter the batch id that you want to see all faculties for:");
+					    	batchIdB = sc.nextInt();
+							sc.nextLine();
+							try {
+								List<String> facultyList = daob.getAllFacultiesOfABatch(batchIdB);
+								
+								facultyList.forEach(c -> System.out.println(c));
+								
+							} catch (BatchException e) {
+								System.out.println(e.getMessage());
+							}
+							adminBatchMenu();
+					    	break;
+					    case 7: // get batch by batch id
+					    	System.out.println("Enter id of the desired batch:");
+					    	batchIdB = sc.nextInt();
+							sc.nextLine();
+							
+							try {
+								Batch batch = daob.getBatchByBatchId(batchIdB);
+								System.out.println(batch);
+							} catch (BatchException e) {
+								System.out.println(e.getMessage());
+							}
+							adminBatchMenu();
+					    	break;
+					    case 8: // get batch by batch name
+					    	System.out.println("Enter name of the desired batch:");
+							String batchName = sc.nextLine();
+							
+							try {
+								Batch batch = daob.getBatchByBatchName(batchName);
+								System.out.println(batch);
+							} catch (BatchException e) {
+								System.out.println(e.getMessage());
+							}
+							adminBatchMenu();
+					    	break;
 					    case 9: // get day wise update of a day
 					    	System.out.println("Enter the day number that you want to see all updates for:");
 							int dayNumber = sc.nextInt();
@@ -317,11 +370,88 @@ public class Main {
 							}
 							adminBatchMenu();
 					    	break;
-					    case 11: // to log out
+					    case 10: // update batch name by batch id
+					    	System.out.println("Enter batch id you want to update the name for:");
+					    	batchIdB = sc.nextInt();
+							
+							sc.nextLine();
+							
+							System.out.println("Enter new name:");
+							String newName = sc.nextLine();
+							
+							String resultC10 = daob.updateBatchNameUsingBatchId(batchIdB, newName);
+							
+							System.out.println(resultC10);
+							adminBatchMenu();
+					    	break;
+					    case 11: // update batch name by batch name
+					    	System.out.println("Enter batch name you want to update the name for:");
+							String batchnameC11 = sc.nextLine();
+							
+							System.out.println("Enter new name:");
+							String newNameC11 = sc.nextLine();
+							
+							String resultC11 = daob.updateBatchNameUsingBatchName(batchnameC11, newNameC11);
+							
+							System.out.println(resultC11);
+							adminBatchMenu();
+					    	break;
+					    case 12: // update batch start date by batch name
+					    	System.out.println("Enter batch name you want to update the batch start date for:");
+							String batchNameC12 = sc.nextLine();
+							
+							System.out.println("Enter new batch start date:");
+							String batchStartDateC12 = sc.nextLine();
+							
+							String resultC12 = daob.updateBatchStartDateUsingBatchName(batchNameC12, batchStartDateC12);
+							
+							System.out.println(resultC12);
+							adminBatchMenu();
+					    	break;
+					    case 13: // update duration in months by batch name
+					    	System.out.println("Enter batch name you want to update the duration in months for:");
+							String batchNameC13 = sc.nextLine();
+							
+							System.out.println("Enter new duration in months:");
+							int newDurationInMonths = sc.nextInt();
+							sc.nextLine();
+							
+							String resultC13 = daob.updateDurationInMonthsUsingBatchName(batchNameC13, newDurationInMonths);
+							
+							System.out.println(resultC13);
+							adminBatchMenu();
+					    	break;
+					    case 14: // update faculty id by batch name
+					    	System.out.println("Enter batch name you want to update the faculty id for:");
+							String batchNameC14 = sc.nextLine();
+							
+							System.out.println("Enter new faculty id:");
+							int newFacultyId = sc.nextInt();
+							sc.nextLine();
+							
+							String resultC14 = daob.updateFacultyIdUsingBatchName(batchNameC14, newFacultyId);
+							
+							System.out.println(resultC14);
+							adminBatchMenu();
+					    	break;
+					    case 15: // update number of students by batch name
+					    	System.out.println("Enter batch name you want to update the number of students for:");
+							String batchNameC15 = sc.nextLine();
+							
+							System.out.println("Enter new number of students:");
+							int newFacultyIdC15 = sc.nextInt();
+							sc.nextLine();
+							
+							String resultC15 = daob.updateNumberOfStudentsUsingBatchName(batchNameC15, newFacultyIdC15);
+							
+							System.out.println(resultC15);
+							adminBatchMenu();
+					    	break;
+					    case 16: // to log out
 					    	exit();
 					    	flagb=false;
 					    	break;
-					    case 12: // go to admin menu
+					    case 17: // go to admin menu
 					    	flagbA = false;
 					    	break;
 						default:
@@ -336,7 +466,7 @@ public class Main {
 							choiceBatchMenu = sc.nextInt();
 							sc.nextLine();
 						}
-						if(choiceBatchMenu!=11) {
+						if(choiceBatchMenu!=16) {
 							flagb = true;
 						}
 					}
@@ -763,13 +893,18 @@ public class Main {
 			}
 		}
 		break;
-			
+		
+// --------------------------Flow for the user operations starts.-------------------------------------		
 		case "u":
 			System.out.println("Please login with your login credentials!");
 			System.out.println("Enter your username:");
 			String username = sc.next();
+			sc.nextLine();
 			System.out.println("Enter your password:");
-			String password = sc.next();
+			String password = sc.nextLine();
+			boolean flagMainU = true;
+			int logInSuccessValU = 1;
+			int uTryBlockSuccess = 0;
 			
 			Connection conn = DBUtil.provideConnection();
 			try {
@@ -778,17 +913,404 @@ public class Main {
 				ps.setString(2, password);
 				ResultSet rs = ps.executeQuery();
 				if(rs.next()) {
-					System.out.println("Login successful.");
-				}
-				else {
-					System.out.println("Invalid credentials.");
+					uTryBlockSuccess = 1;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
+			while(flagMainU==true) {
+				if(uTryBlockSuccess == 1) {
+					if(logInSuccessValU == 1) {
+						System.out.println("Login successful.");
+						logInSuccessValU++;
+					}
+					
+					userMenu();
+					int userMenuchoice = sc.nextInt();
+					sc.nextLine();
+					
+					switch(userMenuchoice) { // all user menu
+					
+					case 1: // user course related operations
+						System.out.println("Welcome to user course menu.");
+						userCourseMenu();
+						choiceCourseMenu = sc.nextInt();
+						sc.nextLine();
+						CourseDao daoU = new CourseDaoImpl();
+						boolean flagU = true;
+						boolean flagAU = true;
+						String courseNameU = null;
+						int courseidcu = 0;
+						while(flagU==true && flagAU==true) {
+							switch (choiceCourseMenu) {
+						    case 1: // get all course details
+								try {
+									List<Course> courseList = daoU.getAllCourseDetails();
+									
+									courseList.forEach(c -> System.out.println(c));
+									
+								} catch (CourseException e) {
+									System.out.println(e.getMessage());
+								}
+								userCourseMenu();
+								break;
+						    case 2: // get course details by course id
+						    	System.out.println("Enter id of the desired course:");
+								courseidcu = sc.nextInt();
+								sc.nextLine();
+								try {
+									Course course = daoU.getCourseByCourseId(courseidcu);
+									System.out.println(course);
+								} catch (CourseException e) {
+									System.out.println(e.getMessage());
+								}
+								userCourseMenu();
+						    	break;
+						    case 3: // get course details by course name
+						    	System.out.println("Enter name of the desired course:");
+								courseNameU = sc.nextLine();
+								try {
+									Course course = daoU.getCourseByCourseName(courseNameU);
+									System.out.println(course);
+								} catch (CourseException e) {
+									System.out.println(e.getMessage());
+								}
+								userCourseMenu();
+						    	break;
+						    case 4: // to log out
+						    	exit();
+						    	flagU=false;
+						    	break;
+						    case 5: // go to user menu
+						    	flagAU = false;
+						    	break;
+							default:
+								System.out.println("Invalid input.");
+								userCourseMenu();
+								break;
+							}
+							if(flagU==false) {
+								break;
+							}
+							if(flagAU == true) {
+								choiceCourseMenu = sc.nextInt();
+								sc.nextLine();
+							}
+							if(choiceCourseMenu!=4) {
+								flagU = true;
+							}
+						}
+						if(flagU==false) {
+							flagMainU=false;
+						}
+						break;
+						
+					case 2: // batch related operations
+						System.out.println("Welcome to user batch menu.");
+						userBatchMenu();
+						int choiceBatchMenu = sc.nextInt();
+						sc.nextLine();
+						BatchDao daob = new BatchDaoImpl();
+						boolean flagb = true;
+						boolean flagbA = true;
+						int batchIdB = 0;
+						while(flagb == true && flagbA == true) {
+							switch (choiceBatchMenu) {
+						    case 1: // get all batch details
+						    	try {
+									List<Batch> batchList = daob.getAllBatchDetails();
+									
+									batchList.forEach(c -> System.out.println(c));
+									
+								} catch (BatchException e) {
+									System.out.println(e.getMessage());
+								}
+								userBatchMenu();
+								break;
+						    case 2: // get all batches names by faculty id
+						    	System.out.println("Enter the faculty id that you want to see all batches for:");
+								int facultyId2 = sc.nextInt();
+								
+								try {
+									List<String> batchList = daob.getAllBatchesNamesOfAFaculty(facultyId2);
+									
+									batchList.forEach(c -> System.out.println(c));
+									
+								} catch (BatchException e) {
+									System.out.println(e.getMessage());
+								}
+								userBatchMenu();
+						    	break;
+						    case 3: // get all batches of a course
+						    	System.out.println("Enter the course id that you want to see all batches for:");
+								int courseId = sc.nextInt();
+								sc.nextLine();
+								try {
+									List<Batch> batchList = daob.getAllBatchesOfACourse(courseId);
+									
+									batchList.forEach(c -> System.out.println(c));
+									
+								} catch (BatchException e) {
+									System.out.println(e.getMessage());
+								}
+								userBatchMenu();
+						    	break;
+						    case 4: // get all faculties of a batch
+						    	System.out.println("Enter the batch id that you want to see all faculties for:");
+						    	batchIdB = sc.nextInt();
+								sc.nextLine();
+								try {
+									List<String> facultyList = daob.getAllFacultiesOfABatch(batchIdB);
+									
+									facultyList.forEach(c -> System.out.println(c));
+									
+								} catch (BatchException e) {
+									System.out.println(e.getMessage());
+								}
+								userBatchMenu();
+						    	break;
+						    case 5: // get batch by batch name
+						    	System.out.println("Enter name of the desired batch:");
+								String batchName = sc.nextLine();
+								
+								try {
+									Batch batch = daob.getBatchByBatchName(batchName);
+									System.out.println(batch);
+								} catch (BatchException e) {
+									System.out.println(e.getMessage());
+								}
+								userBatchMenu();
+						    	break;
+						    case 6: // to log out
+						    	exit();
+						    	flagb=false;
+						    	break;
+						    case 7: // go to user menu
+						    	flagbA = false;
+						    	break;
+							default:
+								System.out.println("Invalid input.");
+								userBatchMenu();
+								break;
+							}
+							if(flagb==false) {
+								break;
+							}
+							if(flagbA == true) {
+								choiceBatchMenu = sc.nextInt();
+								sc.nextLine();
+							}
+							if(choiceBatchMenu!=16) {
+								flagb = true;
+							}
+						}
+						if(flagb==false) {
+						flagMainU = false;
+						}
+						break;
+						
+					case 3: // faculty related operations 
+						System.out.println("Welcome to user faculty menu.");
+						userFacultyMenu();
+						int choiceFacultyMenu = sc.nextInt();
+						sc.nextLine();
+						FacultyDao daof = new FacultyDaoImpl();
+						boolean flagf = true;
+						boolean flagfA = true;
+						String result = null;
+						String facultyName = null; 
+						int facultyId = 0;
+						String newAddress = null;
+						String newEmail = null;
+						long newMobile = 0;
+						String newName = null;
+						while(flagf == true && flagfA == true) {
+							switch (choiceFacultyMenu) {
+						    case 1: // get faculty by faculty id
+						    	System.out.println("Enter id of the desired faculty:");
+								facultyId = sc.nextInt();
+								sc.nextLine();
+								try {
+									Faculty faculty = daof.getFacultyByFacultyId(facultyId);
+									System.out.println(faculty);
+								} catch (FacultyException e) {
+									System.out.println(e.getMessage());
+								}
+								userFacultyMenu();
+						    	break;
+						    case 2: // get faculty by faculty name
+						    	System.out.println("Enter name of the desired faculty:");
+								facultyName = sc.nextLine();
+								
+								try {
+									Faculty faculty = daof.getFacultyByFacultyName(facultyName);
+									System.out.println(faculty);
+								} catch (FacultyException e) {
+									System.out.println(e.getMessage());
+								}
+								userFacultyMenu();
+						    	break;
+						    case 3: // to log out
+						    	exit();
+						    	flagf=false;
+						    	break;
+						    case 4: // go to user menu
+						    	flagfA = false;
+						    	break;
+							default:
+								System.out.println("Invalid input.");
+								userFacultyMenu();
+								break;
+							}
+							if(flagf==false) {
+								break;
+							}
+							if(flagfA == true) {
+								choiceFacultyMenu = sc.nextInt();
+								sc.nextLine();
+							}
+							if(choiceFacultyMenu!=14) {
+								flagf = true;
+							}
+						}
+						if(flagf==false) {
+						flagMainU = false;
+						}
+						break;
+						
+					case 4: // user course plan related operations
+						System.out.println("Welcome to user course plan menu.");
+						userCoursePlanMenu();
+						int choiceCoursePlanMenu = sc.nextInt();
+						sc.nextLine();
+						CoursePlanDao daocp = new CoursePlanDaoImpl();
+						boolean flagcp = true;
+						boolean flagcpA = true;
+						String result1 = null;
+						String status = null; 
+						int planId = 0;
+						int courseId = 0;
+						int daynumber = 0;
+						while(flagcp == true && flagcpA == true) {
+							switch (choiceCoursePlanMenu) {
+							    case 1: // get cp by pid
+						    	System.out.println("Enter the desires plan id to get the course plan:");
+								planId = sc.nextInt();
+								sc.nextLine();
+								
+								try {
+									CoursePlan cp = daocp.getACoursePlanByPlanId(planId);
+									
+									System.out.println(cp);
+									
+								} catch (CoursePlanException e) {
+									System.out.println(e.getMessage());
+								}
+								userCoursePlanMenu();
+								break;
+						    case 2: // get all cp details							
+								try {
+									List<CoursePlan> coursePlanList = daocp.getAllCoursePlanDetails();
+									
+									coursePlanList.forEach(c -> System.out.println(c));
+									
+								} catch (CoursePlanException e) {
+									System.out.println(e.getMessage());
+								}
+								userCoursePlanMenu();
+						    	break;
+						    case 3: // get all cp by status
+						    	System.out.println("Enter the status you want to find courses for:");
+								status = sc.nextLine();
+								
+								try {
+									List<CoursePlan> cplist = daocp.getAllCoursePlansByStatus(status);
+									
+									cplist.forEach(cp -> System.out.println(cp));
+									
+								} catch (CoursePlanException e) {
+									System.out.println(e.getMessage());
+								}
+								userCoursePlanMenu();
+						    	break;
+						    case 4: // get cp of a course
+						    	System.out.println("Enter the desires course id to get course plans:");
+								courseId = sc.nextInt();
+								sc.nextLine();
+								
+								try {
+									List<CoursePlan> cplist = daocp.getAllCoursePlansOfACourse(courseId);
+									
+									cplist.forEach(cp -> System.out.println(cp));
+									
+								} catch (CoursePlanException e) {
+									System.out.println(e.getMessage());
+								}
+								userCoursePlanMenu();
+						    	break;
+						    
+						    case 5: // update status using pid
+						    	System.out.println("Enter plan id you want to update the status for:");
+								planId = sc.nextInt();
+								
+								sc.nextLine();
+								
+								System.out.println("Enter new status:");
+								status = sc.nextLine();
+								
+								result1 = daocp.updateStatusUsingPlanId(planId, status);
+								
+								System.out.println(result1);
+								userCoursePlanMenu();
+						    	break;
+						    case 6: // to log out
+						    	exit();
+						    	flagcp=false;
+						    	break;
+						    case 7: // go to user menu
+						    	flagcpA = false;
+						    	break;
+							default:
+								System.out.println("Invalid input.");
+								userCoursePlanMenu();
+								break;
+							}
+							if(flagcp==false) {
+								break;
+							}
+							if(flagcpA == true) {
+								choiceCoursePlanMenu = sc.nextInt();
+								sc.nextLine();
+							}
+							if(choiceCoursePlanMenu!=11) {
+								flagcp = true;
+							}
+						}
+						if(flagcp==false) {
+						flagMainU = false;
+						}
+						break;
+					case 6:
+						exit();
+						flagMainU=false;
+						break;
+					}
+				}
+				
+				else {
+					System.out.println("Invalid Credentials.");
+					System.out.println("Enter your username:");
+					username = sc.next();
+					sc.nextLine();
+					System.out.println("Enter your password:");
+					password = sc.nextLine();
+				}
+			}
+			
 			break;
-		
+			
+// -------------------------------------main default case----------------------------------------
 		default: 
 			System.out.println("Invalid choice.");
 			break;
@@ -802,19 +1324,7 @@ public class Main {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    // ---------------------------------Utility Functions------------------------------------- //
 	
 	// function 1
 	public static void welcomeMessage() {
@@ -822,27 +1332,43 @@ public class Main {
 		System.out.println("|                                                     |");
 		System.out.println("|                      Welcome to                     |");
 		System.out.println("|                                                     |");
-		System.out.println("|                   DataMonit TOPDOG                  |");
+		System.out.println("|                 * DataMonit TOPDOG *                |");
 		System.out.println("|                                                     |");
+		System.out.println("|          An efficient Data Monitoring System        |");
 		System.out.println("+=====================================================+");
 	}
 	
 	
 	public static void exit() {
 		System.out.println("Logged out.");
+		System.out.println("Thank You!");
 	}
 	// function 2
 	public static void adminMenu() {
-		System.out.println("Welcome to admin menu.");
+		System.out.println("==============================================");
+		System.out.println("            Welcome to admin menu.");
+		System.out.println("==============================================");
 		System.out.println("Press 1 & enter for course related operations.");
 		System.out.println("Press 2 & enter for batch related operations.");
 		System.out.println("Press 3 & enter for faculty related operations.");
 		System.out.println("Press 4 & enter for coursePlan related operations.");
 		System.out.println("Press 5 & enter to log out.");
+		System.out.println("==============================================");
+	}
+	
+	public static void userMenu() {
+		System.out.println("Welcome to user menu.");
+		System.out.println("Press 1 & enter for course related operations.");
+		System.out.println("Press 2 & enter for batch related operations.");
+		System.out.println("Press 3 & enter for faculty related operations.");
+		System.out.println("Press 4 & enter for coursePlan related operations.");
+		System.out.println("Press 5 & enter for facultyUsernamePassword related operations.");
+		System.out.println("Press 6 & enter to log out.");
 	}
 	
 	// function 3
 	public static void adminCourseMenu() {		
+		System.out.println("==============================================");
 		System.out.println("Press 1 & enter to create a course.");
 		System.out.println("Press 2 & enter to get all course details.");
 		System.out.println("Press 3 & enter to get course details by course id.");
@@ -857,23 +1383,48 @@ public class Main {
 		System.out.println("Press 12 & enter to go to admin menu.");
 	}
 	
+	public static void userCourseMenu() {		
+		System.out.println("Press 1 & enter to get all course details.");
+		System.out.println("Press 2 & enter to get course details by course id.");
+		System.out.println("Press 3 & enter to get course details by course name.");
+		System.out.println("Press 4 & enter to log out.");
+		System.out.println("Press 5 & enter to go to user menu.");
+	}
 	
-	public static void adminBatchMenu() {		
+	
+	public static void adminBatchMenu() {	
+		System.out.println("==============================================");
 		System.out.println("Press 1 & enter to create a batch.");
 		System.out.println("Press 2 & enter to get all batch details.");
 		System.out.println("Press 3 & enter to get all batches ids by faculty id.");
 		System.out.println("Press 4 & enter to get all batches namess by faculty id.");
-		System.out.println("Press 5 & enter to get all batches of a course.");
-		System.out.println("Press 6 & enter to get all faculties of a batch.");
+		System.out.println("Press 5 & enter to get all batches of a course by course id.");
+		System.out.println("Press 6 & enter to get all faculties of a batch by batch id.");
 		System.out.println("Press 7 & enter to get batch by batchid.");
 		System.out.println("Press 8 & enter to get batch by batch name.");
 		System.out.println("Press 9 & enter to get day wise update of a day.");
 		System.out.println("Press 10 & enter to update batchname by batch id.");
-		System.out.println("Press 11 & enter to log out.");
-		System.out.println("Press 12 & enter to go to admin menu.");
+		System.out.println("Press 11 & enter to update batchname by batch name.");
+		System.out.println("Press 12 & enter to update batch start date by batch name.");
+		System.out.println("Press 13 & enter to update duration in months by batch name.");
+		System.out.println("Press 14 & enter to update faculty id by batch name.");
+		System.out.println("Press 15 & enter to update number of students by batch name.");
+		System.out.println("Press 16 & enter to log out.");
+		System.out.println("Press 17 & enter to go to admin menu.");
 	}
 	
-	public static void adminFacultyMenu() {		
+	public static void userBatchMenu() {		
+		System.out.println("Press 1 & enter to get all batch details.");
+		System.out.println("Press 2 & enter to get all batches namess by faculty id.");
+		System.out.println("Press 3 & enter to get all batches of a course by course id.");
+		System.out.println("Press 4 & enter to get all faculties of a batch by batch id.");
+		System.out.println("Press 5 & enter to get batch by batch name.");
+		System.out.println("Press 6 & enter to log out.");
+		System.out.println("Press 7 & enter to go to user menu.");
+	}
+	
+	public static void adminFacultyMenu() {
+		System.out.println("==============================================");
 		System.out.println("Press 1 & enter to register a faculty.");
 		System.out.println("Press 2 & enter to get address by faculty name.");
 		System.out.println("Press 3 & enter to get all faculty details.");
@@ -888,10 +1439,18 @@ public class Main {
 		System.out.println("Press 12 & enter to update faculty name by faculty id.");
 		System.out.println("Press 13 & enter to update faculty name by faculty name.");
 		System.out.println("Press 14 & enter to log out.");
-		System.out.println("Press 15 & enter to go to admin menu.");
+		System.out.println("Press 15 & enter to go to user menu.");
+	}
+	
+	public static void userFacultyMenu() {		
+		System.out.println("Press 1 & enter to get faculty by faculty id.");
+		System.out.println("Press 2 & enter to get faculty by faculty name.");
+		System.out.println("Press 3 & enter to log out.");
+		System.out.println("Press 4 & enter to go to user menu.");
 	}
 	
 	public static void adminCoursePlanMenu() {		
+		System.out.println("==============================================");
 		System.out.println("Press 1 & enter to create a course plan.");
 		System.out.println("Press 2 & enter to get course plan by plan id.");
 		System.out.println("Press 3 & enter to get all course plan details.");
@@ -906,87 +1465,13 @@ public class Main {
 		System.out.println("Press 12 & enter to go to admin menu.");
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// function 4
-//	public static void switchCasesForCourseMenu() {
-//		Scanner sc = new Scanner(System.in);
-//		
-//		int choice = sc.nextInt();
-//		sc.nextLine();
-//		
-//		switch(choice){
-//			case 1:
-//				CreateACourse.createC();
-//				break;
-//				
-//		}
-//	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// function 5
-//	public static void inCasesOfAdminCourseMenu() {
-//		Scanner sc = new Scanner(System.in);
-////		int inCasesOfAdminCourseMenuChoice = 0;
-//		System.out.println("Press 1 & enter to go to course admin menu.");
-//		System.out.println("Press 2 & enter to go to admin menu.");
-//		System.out.println("Press 3 & enter to log out.");
-//		
-//		inCasesOfAdminCourseMenuChoice = sc.nextInt();
-//		sc.nextLine();
-//		
-//		switch(inCasesOfAdminCourseMenuChoice) {
-//		case 1:
-//			adminCourseMenu();
-//			break;
-//		case 2:
-//			adminMenu();
-//			break;
-//		case 3:
-//			System.out.println("Logged out successfully.");
-//		}
-//		
-//	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+	public static void userCoursePlanMenu() {		
+		System.out.println("Press 1 & enter to get course plan by plan id.");
+		System.out.println("Press 2 & enter to get all course plan details.");
+		System.out.println("Press 3 & enter to get all course plans by status.");
+		System.out.println("Press 4 & enter to get all course plans of a course.");
+		System.out.println("Press 5 & enter to update status by plan id.");
+		System.out.println("Press 6 & enter to log out.");
+		System.out.println("Press 7 & enter to go to user menu.");
+	}
 }
