@@ -1,0 +1,7 @@
+
+
+
+		
+		
+		System.out.println("Press 6 & enter to log out.");
+		System.out.println("Press 7 & enter to go to admin menu.");
