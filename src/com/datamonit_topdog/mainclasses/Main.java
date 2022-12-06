@@ -1313,8 +1313,7 @@ public class Main {
 // -------------------------------------main default case----------------------------------------
 		default: 
 			System.out.println("Invalid choice.");
-			break;
-			
+			break;	
 		}
 	}
     // ---------------------------------Utility Functions------------------------------------- //
@@ -1330,7 +1329,6 @@ public class Main {
 		System.out.println("|          An efficient Data Monitoring System        |");
 		System.out.println("+=====================================================+");
 	}
-	
 	
 	public static void exit() {
 		System.out.println("Logged out.");
