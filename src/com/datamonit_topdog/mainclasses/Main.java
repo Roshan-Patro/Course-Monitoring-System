@@ -1313,17 +1313,9 @@ public class Main {
 // -------------------------------------main default case----------------------------------------
 		default: 
 			System.out.println("Invalid choice.");
-			break;
-			
+			break;	
 		}
-		
-		
-		
-
 	}
-	
-	
-	
     // ---------------------------------Utility Functions------------------------------------- //
 	
 	// function 1
