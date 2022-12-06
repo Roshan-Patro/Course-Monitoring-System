@@ -1330,7 +1330,6 @@ public class Main {
 		System.out.println("+=====================================================+");
 	}
 	
-	
 	public static void exit() {
 		System.out.println("Logged out.");
 		System.out.println("Thank You!");
