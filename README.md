@@ -1,6 +1,6 @@
-<h1 align="center">vital-hose-4725</h1>
+<h1 align="center">DataMonit TopDog</h1>
 
-<h3 align="center">It's a MERN Stack E-commerce web application with all the major functionalities</h3>
+<h3 align="center">A Course Monitoring System developed using Java, SQL, and JDBC can help different users like Faculty Head (Administrator) and Faculty keep the records of all the courses, batches, and faculties, get daywise updates of every batch and maintain the course plan, as per their roles and eligibility criteria.</h3>
 
 <br />
 
@@ -8,9 +8,9 @@
 <h2 align="center">🖥️ Tech Stack</h2>
 
 
-<h4 align="center">Frontend:</h4>
+<!-- <h4 align="center">Frontend:</h4> -->
 
-<p align="center">
+<!-- <p align="center">
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="reactjs" />
   <img src="https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white" alt="redux" />
   <img src="https://img.shields.io/badge/Chakra%20UI-3bc7bd?style=for-the-badge&logo=chakraui&logoColor=white" alt="chakra-ui" />
@@ -18,13 +18,13 @@
   <img src="https://img.shields.io/badge/Rest_API-02303A?style=for-the-badge&logo=react-router&logoColor=white" alt="restAPI" />
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="css3" />
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="html5" />
-</p>
+</p> -->
 
 
 <h4 align="center">Backend:</h4>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="nodejs" />
+  <img src="https://img.shields.io/badge/Java-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="nodejs" />
   <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="expressjs" />
   <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="mongodb" />
 
