@@ -24,7 +24,7 @@
 <h4 align="center">Backend:</h4>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Java-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="nodejs" />
+  <img src="https://img.shields.io/badge/Java-339933?style=for-the-badge&logo=java&logoColor=white" alt="java" />
   <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="expressjs" />
   <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="mongodb" />
 
